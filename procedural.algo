@@ -1,0 +1,88 @@
+PROCEDURE doc_product(v1,v2 : ARRAY_OF INTEGER VAR dot : INTEGER)
+VAR
+    i : INTEGER;
+BEGIN
+    dot := 0;
+    i := 0 ;
+    IF (v1.length <> v2.length ) THEN
+        Write("les vecteurs n'ont pas la même dimension")
+        dot=NaN
+    END_IF
+    WHILE (i <=v1.length-1) DO
+        dot:= dot + v1[i]*v2[i];
+        i:= i+1
+    END_WHILE
+END
+ALGORITHM orth_vectors
+VAR
+    v1,v2 : ARRAY_OF INTEGER [50];
+    dot : INTEGER;
+BEGIN
+//repeter jusqu'à l'utilisateur donne une valeur positive
+REPEAT
+    Write("donner la taille de v1")
+    Read(n1)
+UNTIL (n1>0)
+    n1 := read_size();
+    read_array(n1,v1);
+
+REPEAT
+    Write("donner la taille de v2")
+    Read(n2)
+UNTIL (n2>0)
+    n2 := read_size();
+    read_array(n2,v2);
+
+    dot_product(v1,v2,dot);
+    IF (dot = 0) THEN
+        Write("V1 et V2 sont orthogonaux");
+    ELSE
+        Write("V1 et V2 ne sont pas orthogonaux");
+    END_IF
+END
+
+// 3)
+
+FUNCTION dot_product(v1,v2 : ARRAY_OF INTEGER) : INTEGER
+VAR
+    i, dot : INTEGER;
+BEGIN
+    dot :=0;
+    i:=0;
+    IF (v1.length <> v2.length) THEN
+        Write("les vecteurs n'ont pas la même dimension");
+        RETURN NaN; 
+    END_IF
+    WHILE (i <v1.length ) DO
+        dot := dot + v1[i]*v2[i];
+    END_WHILE
+    RETURN dot ;
+END
+
+ALGORITHM orth_vectors
+VAR
+    v1,v2 : ARRAY_OF INTEGER [50];
+    dot : INTEGER;
+BEGIN
+//repeter jusqu'à l'utilisateur donne une valeur positive
+REPEAT
+    Write("donner la taille de v1")
+    Read(n1)
+UNTIL (n1>0)
+    n1 := read_size();
+    read_array(n1,v1);
+
+REPEAT
+    Write("donner la taille de v2")
+    Read(n2)
+UNTIL (n2>0)
+    n2 := read_size();
+    read_array(n2,v2);
+
+    dot := dot_product(v1,v2);
+    IF (dot = 0) THEN
+        Write("V1 et V2 sont orthogonaux");
+    ELSE
+        Write("V1 et V2 ne sont pas orthogonaux");
+    END_IF
+END
